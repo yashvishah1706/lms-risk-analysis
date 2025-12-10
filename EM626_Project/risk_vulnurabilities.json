@@ -1,0 +1,326 @@
+{
+"risk_assessment": [
+{
+"component_id": "api_gateway_service",
+"associated_risks": [
+{
+"risk_id": "rsk_001",
+"threat": "DDoS Attack / High Traffic Saturation",
+"impact": "Complete service outage for all users due to overloaded endpoints and routing failure.",
+"mitigation_strategy": "Implement AWS WAF, API throttling, and auto-scaling to absorb traffic surges."
+},
+{
+"risk_id": "rsk_002",
+"threat": "Authentication Bypass / Misconfigured Routes",
+"impact": "Unauthorized users could access restricted APIs and data.",
+"mitigation_strategy": "Enforce strict integration with Cognito, apply zero-trust routing rules, and maintain access logs."
+},
+{
+"risk_id": "rsk_003",
+"threat": "Single Point of Failure in Routing Logic",
+"impact": "Service unavailability if gateway misconfigures routing or fails.",
+"mitigation_strategy": "Deploy redundant gateway instances across regions and continuous route validation."
+}
+]
+},
+{
+"component_id": "authentication_authorization_service",
+"associated_risks": [
+{
+"risk_id": "rsk_004",
+"threat": "Compromised Credentials or Token Theft",
+"impact": "Unauthorized system-wide access and data breaches.",
+"mitigation_strategy": "Enforce MFA, JWT expiration policies, and AWS Cognito adaptive authentication."
+},
+{
+"risk_id": "rsk_005",
+"threat": "Misconfigured Roles and Permissions",
+"impact": "Privilege escalation or exposure of sensitive data.",
+"mitigation_strategy": "Regular RBAC audits and automated IAM role scanning."
+},
+{
+"risk_id": "rsk_006",
+"threat": "Service Outage or Cognito Region Failure",
+"impact": "All users locked out, halting system access.",
+"mitigation_strategy": "Enable Cognito multi-region replication and fallback authentication cache."
+}
+]
+},
+{
+"component_id": "content_delivery_service",
+"associated_risks": [
+{
+"risk_id": "rsk_007",
+"threat": "Data Leakage through Public Object URLs",
+"impact": "Exposure of private course materials or user files.",
+"mitigation_strategy": "Use presigned URLs with expiration and S3 bucket access policies."
+},
+{
+"risk_id": "rsk_008",
+"threat": "Latency or Timeout under High Load",
+"impact": "Slow content delivery affecting student experience.",
+"mitigation_strategy": "Enable caching (Redis), use Lambda concurrency controls, and CDN acceleration."
+},
+{
+"risk_id": "rsk_009",
+"threat": "Lambda Execution Limit / Cold Start Delays",
+"impact": "Inconsistent delivery performance or function failures.",
+"mitigation_strategy": "Use provisioned concurrency and monitor function performance metrics."
+}
+]
+},
+{
+"component_id": "application_load_balancer",
+"associated_risks": [
+{
+"risk_id": "rsk_010",
+"threat": "Improper Health Checks / Routing Failure",
+"impact": "Traffic misrouted, leading to degraded or unavailable services.",
+"mitigation_strategy": "Configure multiple target groups, health thresholds, and failover routing."
+},
+{
+"risk_id": "rsk_011",
+"threat": "SSL/TLS Misconfiguration",
+"impact": "Unsecured communication between clients and backend services.",
+"mitigation_strategy": "Enforce TLS 1.2+, automate certificate rotation, and use AWS ACM."
+},
+{
+"risk_id": "rsk_012",
+"threat": "Load Balancer Resource Exhaustion",
+"impact": "Dropped connections or degraded performance under peak load.",
+"mitigation_strategy": "Enable auto-scaling target groups and AWS Shield protection."
+}
+]
+},
+{
+"component_id": "primary_database_cluster",
+"associated_risks": [
+{
+"risk_id": "rsk_013",
+"threat": "Data Corruption or Loss",
+"impact": "Critical loss of student records and course data.",
+"mitigation_strategy": "Enable automated RDS backups, point-in-time recovery, and multi-AZ failover."
+},
+{
+"risk_id": "rsk_014",
+"threat": "Unauthorized Data Access",
+"impact": "Leakage of personal and institutional information.",
+"mitigation_strategy": "Encrypt at rest and in transit, apply IAM least-privilege policies."
+},
+{
+"risk_id": "rsk_015",
+"threat": "Performance Bottleneck",
+"impact": "Slow application response impacting all services.",
+"mitigation_strategy": "Use read replicas, query optimization, and database connection pooling."
+}
+]
+},
+{
+"component_id": "object_storage",
+"associated_risks": [
+{
+"risk_id": "rsk_016",
+"threat": "Accidental Public Exposure",
+"impact": "Sensitive files or media accessible via open S3 bucket.",
+"mitigation_strategy": "Enable S3 Block Public Access, use IAM-based access, and continuous policy scanning."
+},
+{
+"risk_id": "rsk_017",
+"threat": "Data Integrity Loss or Overwrite",
+"impact": "Corrupted files and unavailable learning materials.",
+"mitigation_strategy": "Enable versioning, replication, and checksums for validation."
+},
+{
+"risk_id": "rsk_018",
+"threat": "Storage Cost Overruns",
+"impact": "Uncontrolled cloud expenditure from retained content.",
+"mitigation_strategy": "Apply lifecycle policies and Glacier archival for older content."
+}
+]
+},
+{
+"component_id": "backup_dr_service",
+"associated_risks": [
+{
+"risk_id": "rsk_019",
+"threat": "Backup Failure or Incomplete Recovery",
+"impact": "Irretrievable loss of data after incident or corruption.",
+"mitigation_strategy": "Perform regular backup validation tests and multi-region redundancy."
+},
+{
+"risk_id": "rsk_020",
+"threat": "Cross-region Latency and Cost Overhead",
+"impact": "Delayed backup completion and higher operational costs.",
+"mitigation_strategy": "Optimize backup windows and use differential backups."
+},
+{
+"risk_id": "rsk_021",
+"threat": "Ransomware Attack on Backup Data",
+"impact": "Encrypted or deleted backups during breach.",
+"mitigation_strategy": "Enable immutable backups and access control separation."
+}
+]
+},
+{
+"component_id": "content_delivery_network",
+"associated_risks": [
+{
+"risk_id": "rsk_022",
+"threat": "Edge Cache Invalidation Delay",
+"impact": "Outdated or incorrect content served to users.",
+"mitigation_strategy": "Automate cache invalidation and use versioned assets."
+},
+{
+"risk_id": "rsk_023",
+"threat": "DDoS Flood at Edge Nodes",
+"impact": "Regional slowdowns or unavailability.",
+"mitigation_strategy": "Enable AWS Shield Advanced and regional load balancing."
+},
+{
+"risk_id": "rsk_024",
+"threat": "Misconfigured Origins (API Gateway or S3)",
+"impact": "Broken content delivery or data leakage.",
+"mitigation_strategy": "Validate origin settings and restrict signed URLs."
+}
+]
+},
+{
+"component_id": "cache_layer",
+"associated_risks": [
+{
+"risk_id": "rsk_025",
+"threat": "Cache Inconsistency / Stale Data",
+"impact": "Users receive outdated data (e.g., old grades or course updates).",
+"mitigation_strategy": "Implement cache invalidation strategies and short TTLs."
+},
+{
+"risk_id": "rsk_026",
+"threat": "Memory Saturation / Eviction Storms",
+"impact": "Service performance degradation or timeouts.",
+"mitigation_strategy": "Monitor Redis memory metrics and enable clustering."
+},
+{
+"risk_id": "rsk_027",
+"threat": "Unauthorized Cache Access",
+"impact": "Sensitive session data exposed.",
+"mitigation_strategy": "Use VPC isolation and Redis AUTH with IAM-based credentials."
+}
+]
+},
+{
+"component_id": "user_management_service",
+"associated_risks": [
+{
+"risk_id": "rsk_028",
+"threat": "Data Integrity Issues During Enrollment",
+"impact": "Incorrect course-user mappings or duplicate entries.",
+"mitigation_strategy": "Enforce database constraints and transaction validation."
+},
+{
+"risk_id": "rsk_029",
+"threat": "Service Downtime During High Registration Load",
+"impact": "Failed or delayed user onboarding.",
+"mitigation_strategy": "Scale ECS tasks and implement load-shedding mechanisms."
+},
+{
+"risk_id": "rsk_030",
+"threat": "Broken Integration with Auth Service",
+"impact": "User authentication mismatch and access failures.",
+"mitigation_strategy": "Use service mesh observability and fallback login path."
+}
+]
+},
+{
+"component_id": "course_management_service",
+"associated_risks": [
+{
+"risk_id": "rsk_031",
+"threat": "Corrupted Course Data due to Faulty Updates",
+"impact": "Course schedules or modules missing or incorrect.",
+"mitigation_strategy": "Apply transactional updates and database triggers."
+},
+{
+"risk_id": "rsk_032",
+"threat": "Concurrent Editing Conflicts",
+"impact": "Overwritten course metadata and loss of edits.",
+"mitigation_strategy": "Implement optimistic locking and version control."
+},
+{
+"risk_id": "rsk_033",
+"threat": "Service Overload during Semester Rollout",
+"impact": "System slowdown affecting instructors and students.",
+"mitigation_strategy": "Pre-scale ECS clusters and cache frequent reads."
+}
+]
+},
+{
+"component_id": "assignment_grading_service",
+"associated_risks": [
+{
+"risk_id": "rsk_034",
+"threat": "Automated Grading Algorithm Error",
+"impact": "Incorrect grades assigned to students.",
+"mitigation_strategy": "Implement human review for edge cases and versioned scoring models."
+},
+{
+"risk_id": "rsk_035",
+"threat": "File Upload Corruption or Timeout",
+"impact": "Missing or unreadable assignment submissions.",
+"mitigation_strategy": "Add upload retries, checksum validation, and S3 integrity checks."
+},
+{
+"risk_id": "rsk_036",
+"threat": "Unauthorized Grade Tampering",
+"impact": "Integrity loss of academic evaluation data.",
+"mitigation_strategy": "Implement immutable logs and role-based approval workflows."
+}
+]
+},
+{
+"component_id": "assessment_quiz_engine",
+"associated_risks": [
+{
+"risk_id": "rsk_037",
+"threat": "Cheating or Quiz Tampering",
+"impact": "Unfair grading and loss of academic integrity.",
+"mitigation_strategy": "Integrate proctoring and randomization of question order."
+},
+{
+"risk_id": "rsk_038",
+"threat": "Service Outage During Live Quiz",
+"impact": "Loss of progress and poor user experience.",
+"mitigation_strategy": "Implement auto-save checkpoints and redundant Lambda invocations."
+},
+{
+"risk_id": "rsk_039",
+"threat": "Data Synchronization Delay",
+"impact": "Grades or responses not updated in real-time.",
+"mitigation_strategy": "Use message queue buffering and retry policies."
+}
+]
+},
+{
+"component_id": "video_streaming_service",
+"associated_risks": [
+{
+"risk_id": "rsk_040",
+"threat": "Encoding Failure or Format Incompatibility",
+"impact": "Inaccessible video lectures for users.",
+"mitigation_strategy": "Perform pre-upload validation and fallback encoding pipeline."
+},
+{
+"risk_id": "rsk_041",
+"threat": "Bandwidth Constraints During Peak Hours",
+"impact": "Video buffering and degraded streaming quality.",
+"mitigation_strategy": "Use adaptive bitrate streaming and global CDN replication."
+},
+{
+"risk_id": "rsk_042",
+"threat": "Copyright or Licensing Violations",
+"impact": "Legal exposure and takedown of hosted content.",
+"mitigation_strategy": "Automate content ownership verification before publishing."
+}
+]
+}
+]
+}

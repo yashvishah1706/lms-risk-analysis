@@ -1,0 +1,69 @@
+{
+  "total_components": 22,
+  "by_type": {
+    "application": 10,
+    "network": 3,
+    "security": 2,
+    "storage": 3,
+    "infrastructure": 4
+  },
+  "by_criticality": {
+    "High": 9,
+    "Critical": 8,
+    "Medium": 5
+  },
+  "top_dependencies": [
+    {
+      "id": "api_gateway_service",
+      "name": "API Gateway Service",
+      "count": 7
+    },
+    {
+      "id": "application_load_balancer",
+      "name": "Application Load Balancer",
+      "count": 6
+    },
+    {
+      "id": "content_delivery_service",
+      "name": "Content Delivery Service",
+      "count": 3
+    },
+    {
+      "id": "content_delivery_network",
+      "name": "Content Delivery Network",
+      "count": 3
+    },
+    {
+      "id": "user_management_service",
+      "name": "User Management Service",
+      "count": 2
+    }
+  ],
+  "top_depended_upon": [
+    {
+      "id": "primary_database_cluster",
+      "name": "Primary Database Cluster",
+      "count": 10
+    },
+    {
+      "id": "cache_layer",
+      "name": "Cache Layer",
+      "count": 6
+    },
+    {
+      "id": "object_storage",
+      "name": "Object Storage",
+      "count": 5
+    },
+    {
+      "id": "user_management_service",
+      "name": "User Management Service",
+      "count": 2
+    },
+    {
+      "id": "course_management_service",
+      "name": "Course Management Service",
+      "count": 2
+    }
+  ]
+}

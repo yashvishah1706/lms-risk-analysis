@@ -1,0 +1,253 @@
+{
+  "timestamp": "2025-10-30",
+  "graph_statistics": {
+    "num_nodes": 22,
+    "num_edges": 38,
+    "density": 0.08225108225108226,
+    "is_dag": true
+  },
+  "node_features": {
+    "web_frontend_application": {
+      "in_degree": 0,
+      "out_degree": 1,
+      "total_degree": 1,
+      "betweenness_centrality": 0.0,
+      "closeness_centrality": 0.0,
+      "pagerank": 0.025370305547569465,
+      "clustering_coefficient": 0,
+      "criticality": "High",
+      "type": "application"
+    },
+    "api_gateway_service": {
+      "in_degree": 1,
+      "out_degree": 7,
+      "total_degree": 8,
+      "betweenness_centrality": 0.023992673992673994,
+      "closeness_centrality": 0.06349206349206349,
+      "pagerank": 0.038668524329774225,
+      "clustering_coefficient": 0,
+      "criticality": "Critical",
+      "type": "network"
+    },
+    "authentication_authorization_service": {
+      "in_degree": 1,
+      "out_degree": 1,
+      "total_degree": 2,
+      "betweenness_centrality": 0.000706436420722135,
+      "closeness_centrality": 0.07142857142857142,
+      "pagerank": 0.030065855514453007,
+      "clustering_coefficient": 0,
+      "criticality": "Critical",
+      "type": "security"
+    },
+    "user_management_service": {
+      "in_degree": 2,
+      "out_degree": 2,
+      "total_degree": 4,
+      "betweenness_centrality": 0.0030568637711494854,
+      "closeness_centrality": 0.10884353741496597,
+      "pagerank": 0.0355439971424838,
+      "clustering_coefficient": 0,
+      "criticality": "High",
+      "type": "application"
+    },
+    "course_management_service": {
+      "in_degree": 2,
+      "out_degree": 2,
+      "total_degree": 4,
+      "betweenness_centrality": 0.0030568637711494854,
+      "closeness_centrality": 0.10884353741496597,
+      "pagerank": 0.0355439971424838,
+      "clustering_coefficient": 0,
+      "criticality": "High",
+      "type": "application"
+    },
+    "content_delivery_service": {
+      "in_degree": 2,
+      "out_degree": 3,
+      "total_degree": 5,
+      "betweenness_centrality": 0.007818768533054249,
+      "closeness_centrality": 0.10884353741496597,
+      "pagerank": 0.0355439971424838,
+      "clustering_coefficient": 0,
+      "criticality": "Critical",
+      "type": "application"
+    },
+    "video_streaming_service": {
+      "in_degree": 0,
+      "out_degree": 1,
+      "total_degree": 1,
+      "betweenness_centrality": 0.0,
+      "closeness_centrality": 0.0,
+      "pagerank": 0.025370305547569465,
+      "clustering_coefficient": 0,
+      "criticality": "High",
+      "type": "application"
+    },
+    "assignment_grading_service": {
+      "in_degree": 2,
+      "out_degree": 2,
+      "total_degree": 4,
+      "betweenness_centrality": 0.0030568637711494854,
+      "closeness_centrality": 0.10884353741496597,
+      "pagerank": 0.0355439971424838,
+      "clustering_coefficient": 0,
+      "criticality": "High",
+      "type": "application"
+    },
+    "assessment_quiz_engine": {
+      "in_degree": 2,
+      "out_degree": 2,
+      "total_degree": 4,
+      "betweenness_centrality": 0.0030568637711494854,
+      "closeness_centrality": 0.10884353741496597,
+      "pagerank": 0.0355439971424838,
+      "clustering_coefficient": 0,
+      "criticality": "High",
+      "type": "application"
+    },
+    "discussion_forum_service": {
+      "in_degree": 2,
+      "out_degree": 2,
+      "total_degree": 4,
+      "betweenness_centrality": 0.0030568637711494854,
+      "closeness_centrality": 0.10884353741496597,
+      "pagerank": 0.0355439971424838,
+      "clustering_coefficient": 0,
+      "criticality": "Medium",
+      "type": "application"
+    },
+    "analytics_reporting_service": {
+      "in_degree": 0,
+      "out_degree": 2,
+      "total_degree": 2,
+      "betweenness_centrality": 0.0,
+      "closeness_centrality": 0.0,
+      "pagerank": 0.025370305547569465,
+      "clustering_coefficient": 0,
+      "criticality": "Medium",
+      "type": "application"
+    },
+    "notification_service": {
+      "in_degree": 0,
+      "out_degree": 1,
+      "total_degree": 1,
+      "betweenness_centrality": 0.0,
+      "closeness_centrality": 0.0,
+      "pagerank": 0.025370305547569465,
+      "clustering_coefficient": 0,
+      "criticality": "Medium",
+      "type": "application"
+    },
+    "application_load_balancer": {
+      "in_degree": 1,
+      "out_degree": 6,
+      "total_degree": 7,
+      "betweenness_centrality": 0.018864468864468863,
+      "closeness_centrality": 0.06349206349206349,
+      "pagerank": 0.038668524329774225,
+      "clustering_coefficient": 0,
+      "criticality": "Critical",
+      "type": "network"
+    },
+    "primary_database_cluster": {
+      "in_degree": 10,
+      "out_degree": 0,
+      "total_degree": 10,
+      "betweenness_centrality": 0.0,
+      "closeness_centrality": 0.4444444444444444,
+      "pagerank": 0.17965834717827864,
+      "clustering_coefficient": 0,
+      "criticality": "Critical",
+      "type": "storage"
+    },
+    "cache_layer": {
+      "in_degree": 6,
+      "out_degree": 0,
+      "total_degree": 6,
+      "betweenness_centrality": 0.0,
+      "closeness_centrality": 0.2801120448179272,
+      "pagerank": 0.11097200847732235,
+      "clustering_coefficient": 0,
+      "criticality": "High",
+      "type": "storage"
+    },
+    "object_storage": {
+      "in_degree": 5,
+      "out_degree": 0,
+      "total_degree": 5,
+      "betweenness_centrality": 0.0,
+      "closeness_centrality": 0.27705627705627706,
+      "pagerank": 0.09186950737477276,
+      "clustering_coefficient": 0,
+      "criticality": "Critical",
+      "type": "storage"
+    },
+    "content_delivery_network": {
+      "in_degree": 1,
+      "out_degree": 3,
+      "total_degree": 4,
+      "betweenness_centrality": 0.028571428571428574,
+      "closeness_centrality": 0.047619047619047616,
+      "pagerank": 0.04693540278008326,
+      "clustering_coefficient": 0,
+      "criticality": "High",
+      "type": "network"
+    },
+    "message_queue_service": {
+      "in_degree": 1,
+      "out_degree": 0,
+      "total_degree": 1,
+      "betweenness_centrality": 0.0,
+      "closeness_centrality": 0.047619047619047616,
+      "pagerank": 0.04693540278008326,
+      "clustering_coefficient": 0,
+      "criticality": "Medium",
+      "type": "infrastructure"
+    },
+    "search_service": {
+      "in_degree": 0,
+      "out_degree": 1,
+      "total_degree": 1,
+      "betweenness_centrality": 0.0,
+      "closeness_centrality": 0.0,
+      "pagerank": 0.025370305547569465,
+      "clustering_coefficient": 0,
+      "criticality": "Medium",
+      "type": "infrastructure"
+    },
+    "monitoring_logging": {
+      "in_degree": 0,
+      "out_degree": 0,
+      "total_degree": 0,
+      "betweenness_centrality": 0.0,
+      "closeness_centrality": 0.0,
+      "pagerank": 0.025370305547569465,
+      "clustering_coefficient": 0,
+      "criticality": "High",
+      "type": "infrastructure"
+    },
+    "backup_dr_service": {
+      "in_degree": 0,
+      "out_degree": 2,
+      "total_degree": 2,
+      "betweenness_centrality": 0.0,
+      "closeness_centrality": 0.0,
+      "pagerank": 0.025370305547569465,
+      "clustering_coefficient": 0,
+      "criticality": "Critical",
+      "type": "infrastructure"
+    },
+    "security_compliance": {
+      "in_degree": 0,
+      "out_degree": 0,
+      "total_degree": 0,
+      "betweenness_centrality": 0.0,
+      "closeness_centrality": 0.0,
+      "pagerank": 0.025370305547569465,
+      "clustering_coefficient": 0,
+      "criticality": "Critical",
+      "type": "security"
+    }
+  }
+}

@@ -1,0 +1,217 @@
+{
+"components": [
+{
+"id": "web_frontend_application",
+"name": "Web Frontend Application",
+"type": "application",
+"technology": "React-based SPA (served via AWS CloudFront)",
+"purpose": "User interface for students, instructors, and administrators.",
+"criticality": "High",
+"dependencies": ["content_delivery_network"]
+},
+{
+"id": "api_gateway_service",
+"name": "API Gateway Service",
+"type": "network",
+"technology": "AWS API Gateway (REST & WebSocket)",
+"purpose": "Central routing and request management for all backend services.",
+"criticality": "Critical",
+"dependencies": [
+"authentication_authorization_service",
+"user_management_service",
+"course_management_service",
+"content_delivery_service",
+"assignment_grading_service",
+"assessment_quiz_engine",
+"discussion_forum_service"
+]
+},
+{
+"id": "authentication_authorization_service",
+"name": "Authentication & Authorization Service",
+"type": "security",
+"technology": "Custom OAuth2 using AWS Cognito",
+"purpose": "User authentication, SSO integration, role-based access control.",
+"criticality": "Critical",
+"dependencies": ["primary_database_cluster"]
+},
+{
+"id": "user_management_service",
+"name": "User Management Service",
+"type": "application",
+"technology": "Node.js microservice on AWS ECS",
+"purpose": "User profile management, enrollment, permissions.",
+"criticality": "High",
+"dependencies": ["primary_database_cluster", "cache_layer"]
+},
+{
+"id": "course_management_service",
+"name": "Course Management Service",
+"type": "application",
+"technology": "Java Spring Boot on AWS ECS",
+"purpose": "Course creation, curriculum management, scheduling.",
+"criticality": "High",
+"dependencies": ["primary_database_cluster", "cache_layer"]
+},
+{
+"id": "content_delivery_service",
+"name": "Content Delivery Service",
+"type": "application",
+"technology": "Python FastAPI on AWS Lambda",
+"purpose": "Serve course materials, videos, documents, assignments.",
+"criticality": "Critical",
+"dependencies": ["object_storage", "primary_database_cluster", "cache_layer"]
+},
+{
+"id": "video_streaming_service",
+"name": "Video Streaming Service",
+"type": "application",
+"technology": "AWS MediaConvert with CloudFront distribution",
+"purpose": "Video lecture encoding, adaptive streaming, live sessions.",
+"criticality": "High",
+"dependencies": ["object_storage"]
+},
+{
+"id": "assignment_grading_service",
+"name": "Assignment & Grading Service",
+"type": "application",
+"technology": "Python microservice on AWS ECS",
+"purpose": "Assignment submission, automated grading, rubric management.",
+"criticality": "High",
+"dependencies": ["primary_database_cluster", "cache_layer"]
+},
+{
+"id": "assessment_quiz_engine",
+"name": "Assessment & Quiz Engine",
+"type": "application",
+"technology": "Node.js on AWS Lambda",
+"purpose": "Quiz delivery, proctoring integration, real-time scoring.",
+"criticality": "High",
+"dependencies": ["primary_database_cluster", "cache_layer"]
+},
+{
+"id": "discussion_forum_service",
+"name": "Discussion Forum Service",
+"type": "application",
+"technology": "Node.js on AWS ECS",
+"purpose": "Threaded discussions, peer collaboration, Q&A.",
+"criticality": "Medium",
+"dependencies": ["primary_database_cluster", "cache_layer"]
+},
+{
+"id": "analytics_reporting_service",
+"name": "Analytics & Reporting Service",
+"type": "application",
+"technology": "Python + Apache Spark on AWS EMR",
+"purpose": "Learning analytics, progress tracking, institutional reporting.",
+"criticality": "Medium",
+"dependencies": ["primary_database_cluster", "object_storage"]
+},
+{
+"id": "notification_service",
+"name": "Notification Service",
+"type": "application",
+"technology": "AWS SNS + SES integration",
+"purpose": "Email, SMS, and in-app notifications.",
+"criticality": "Medium",
+"dependencies": ["message_queue_service"]
+},
+{
+"id": "application_load_balancer",
+"name": "Application Load Balancer",
+"type": "network",
+"technology": "AWS Application Load Balancer (ALB)",
+"purpose": "Distribute traffic across service instances and perform health checks.",
+"criticality": "Critical",
+"dependencies": [
+"user_management_service",
+"course_management_service",
+"content_delivery_service",
+"assignment_grading_service",
+"assessment_quiz_engine",
+"discussion_forum_service"
+]
+},
+{
+"id": "primary_database_cluster",
+"name": "Primary Database Cluster",
+"type": "storage",
+"technology": "AWS RDS PostgreSQL Multi-AZ",
+"purpose": "Store user data, courses, enrollments, grades, and content metadata.",
+"criticality": "Critical",
+"dependencies": []
+},
+{
+"id": "cache_layer",
+"name": "Cache Layer",
+"type": "storage",
+"technology": "AWS ElastiCache (Redis)",
+"purpose": "Session storage, caching, and rate limiting.",
+"criticality": "High",
+"dependencies": []
+},
+{
+"id": "object_storage",
+"name": "Object Storage",
+"type": "storage",
+"technology": "AWS S3 with lifecycle policies",
+"purpose": "Store course materials, user uploads, video files, and backups.",
+"criticality": "Critical",
+"dependencies": []
+},
+{
+"id": "content_delivery_network",
+"name": "Content Delivery Network",
+"type": "network",
+"technology": "AWS CloudFront global edge network",
+"purpose": "Cache and deliver static assets, videos, and API responses globally.",
+"criticality": "High",
+"dependencies": ["application_load_balancer", "object_storage", "api_gateway_service"]
+},
+{
+"id": "message_queue_service",
+"name": "Message Queue Service",
+"type": "infrastructure",
+"technology": "AWS Simple Queue Service (SQS)",
+"purpose": "Asynchronous task processing and event-driven workflows.",
+"criticality": "Medium",
+"dependencies": []
+},
+{
+"id": "search_service",
+"name": "Search Service",
+"type": "infrastructure",
+"technology": "AWS OpenSearch Service",
+"purpose": "Full-text search for courses, content, discussions, and users.",
+"criticality": "Medium",
+"dependencies": ["primary_database_cluster"]
+},
+{
+"id": "monitoring_logging",
+"name": "Monitoring & Logging",
+"type": "infrastructure",
+"technology": "AWS CloudWatch",
+"purpose": "System health monitoring, log aggregation, and alerting.",
+"criticality": "High",
+"dependencies": []
+},
+{
+"id": "backup_dr_service",
+"name": "Backup & DR Service",
+"type": "infrastructure",
+"technology": "AWS Backup + Cross-region replication",
+"purpose": "Automated backups, point-in-time recovery, and disaster recovery.",
+"criticality": "Critical",
+"dependencies": ["primary_database_cluster", "object_storage"]
+},
+{
+"id": "security_compliance",
+"name": "Security & Compliance",
+"type": "security",
+"technology": "AWS WAF, Shield, GuardDuty, Config",
+"purpose": "DDoS protection, threat detection, and compliance monitoring.",
+"criticality": "Critical",
+"dependencies": []
+}
+]
+}

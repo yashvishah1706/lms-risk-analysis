@@ -1,0 +1,160 @@
+﻿Learning Management System (LMS) Architecture
+AWS-Based Cloud Infrastructure
+System Overview
+This document describes the architecture of a modern Learning Management System (LMS) deployed on Amazon Web Services (AWS). The system serves 50,000+ concurrent users across educational institutions, providing course management, content delivery, assessment, and analytics capabilities.
+Core Application Components
+The LMS is built using a microservice architecture, with each component designed for a specific function, allowing for independent scaling and deployment.
+#
+	Component
+	Technology / Platform
+	Purpose
+	Criticality
+	1
+	Web Frontend Application
+	React-based SPA (AWS CloudFront CDN)
+	User interface for students, instructors, and administrators.
+	High
+	2
+	API Gateway Service
+	AWS API Gateway (REST & WebSocket)
+	Central routing and request management for all backend services.
+	Critical
+	3
+	Authentication & Authorization Service
+	Custom OAuth2 (AWS Cognito)
+	User authentication, SSO integration, role-based access control.
+	Critical
+	4
+	User Management Service
+	Node.js microservice (AWS ECS)
+	User profile management, enrollment, permissions.
+	High
+	5
+	Course Management Service
+	Java Spring Boot (AWS ECS)
+	Course creation, curriculum management, scheduling.
+	High
+	6
+	Content Delivery Service
+	Python FastAPI (AWS Lambda)
+	Serve course materials, videos, documents, assignments.
+	Critical
+	7
+	Video Streaming Service
+	AWS MediaConvert + CloudFront
+	Video lecture encoding, adaptive streaming, live sessions.
+	High
+	8
+	Assignment & Grading Service
+	Python microservice (AWS ECS)
+	Assignment submission, automated grading, rubric management.
+	High
+	9
+	Assessment & Quiz Engine
+	Node.js service (AWS Lambda)
+	Quiz delivery, proctoring integration, real-time scoring.
+	High
+	10
+	Discussion Forum Service
+	Node.js (AWS ECS)
+	Threaded discussions, peer collaboration, Q&A.
+	Medium
+	11
+	Analytics & Reporting Service
+	Python + Apache Spark (AWS EMR)
+	Learning analytics, progress tracking, institutional reporting.
+	Medium
+	12
+	Notification Service
+	AWS SNS + SES integration service
+	Email, SMS, and in-app notifications.
+	Medium
+	Infrastructure Components
+These AWS services provide the foundational layer for all application components.
+#
+	Component
+	Technology / Platform
+	Purpose
+	Criticality
+	13
+	Application Load Balancer
+	AWS ALB
+	Distribute traffic across multiple service instances and perform health checks.
+	Critical
+	14
+	Primary Database Cluster
+	AWS RDS PostgreSQL Multi-AZ
+	Store user data, courses, enrollments, grades, and content metadata.
+	Critical
+	15
+	Cache Layer
+	AWS ElastiCache Redis cluster
+	Session storage, frequently accessed data caching, and rate limiting.
+	High
+	16
+	Object Storage
+	AWS S3 with lifecycle policies
+	Store course materials, user uploads, video files, and backups.
+	Critical
+	17
+	Content Delivery Network
+	AWS CloudFront global edge network
+	Cache and deliver static assets, videos, and API responses globally.
+	High
+	18
+	Message Queue Service
+	AWS Simple Queue Service (SQS)
+	Asynchronous task processing and event-driven workflows.
+	Medium
+	19
+	Search Service
+	AWS OpenSearch Service
+	Full-text search for courses, content, discussions, users.
+	Medium
+	20
+	Monitoring & Logging
+	AWS CloudWatch
+	System health monitoring, log aggregation, and alerting.
+	High
+	21
+	Backup & DR Service
+	AWS Backup + Cross-region replication
+	Automated backups, point-in-time recovery, and disaster recovery.
+	Critical
+	22
+	Security & Compliance
+	AWS WAF, Shield, GuardDuty, Config
+	DDoS protection, threat detection, and compliance monitoring.
+	Critical
+	Dependency and Risk Analysis
+Dependency Relationships
+Critical Dependency Chains:
+1. User Access Flow: CloudFront $\to$ Load Balancer $\to$ API Gateway $\to$ Authentication Service $\to$ RDS
+2. Content Delivery Flow: User Request $\to$ CloudFront $\to$ S3 $\to$ Content Service $\to$ RDS
+3. Video Streaming Flow: User $\to$ CloudFront $\to$ S3 $\to$ Video Service $\to$ MediaConvert
+4. Real-time Operations: WebSocket API $\to$ Cache (ElastiCache) $\to$ Application Services
+Single Points of Failure (High Risk)
+These components, if failed, could halt large segments or the entirety of the system.
+* API Gateway: All services depend on it for routing.
+* RDS Primary Database: Core data storage for most services.
+* Authentication Service: Controls all system access.
+* S3 Storage: Houses all course content and user uploads.
+* Load Balancer (ALB): All incoming traffic routes through it.
+Cascading Failure Scenarios
+* If RDS fails $\to$ Authentication, User, Course, Content, Assignment services all fail.
+* If API Gateway fails $\to$ All client-facing services become unreachable.
+* If S3 fails $\to$ Content delivery, video streaming, and file access all fail.
+* If ElastiCache fails $\to$ Session management breaks, performance degrades significantly.
+AWS Outage Impact Analysis
+December 2021 AWS US-EAST-1 Outage Scenario
+During a regional outage, the following LMS impacts are anticipated or occurred:
+* API Gateway (in affected region) becomes unavailable $\to$ All API requests fail.
+* CloudFront experiences degraded performance $\to$ Content delivery slows (but often remains partially operational).
+* RDS instances in affected AZs experience connection issues.
+* Lambda functions fail to execute $\to$ Serverless components offline.
+* S3 experiences elevated error rates $\to$ File access interrupted.
+System Resilience Gaps
+* Insufficient multi-region redundancy (over-reliance on a single AWS region, e.g., us-east-1).
+* Lack of graceful degradation for non-critical features.
+* No automatic failover for critical database operations (despite Multi-AZ, cross-region DR is missing).
+* Limited offline capability for cached content.

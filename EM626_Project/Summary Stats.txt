@@ -1,0 +1,62 @@
+Here’s a concise summary based on the **corrected components JSON** you approved:
+
+# Summary Statistics
+
+**1) Total components**
+
+* **22**
+
+**2) Count by type**
+
+* application: **10**
+* infrastructure: **4**
+* storage: **3**
+* network: **3**
+* security: **2**
+
+**3) Count by criticality**
+
+* Critical: **8**
+* High: **9**
+* Medium: **5**
+* Low: **0**
+
+**4) Top 5 by most dependencies (out-degree)**
+
+1. **api_gateway_service** — **7**
+2. **application_load_balancer** — **6**
+3. **content_delivery_service** — **3**
+4. **content_delivery_network** — **3**
+5. **(tie at 2 deps)**: **user_management_service**, **course_management_service**, **assignment_grading_service**, **assessment_quiz_engine**, **discussion_forum_service**, **analytics_reporting_service**, **backup_dr_service** — *2 each*
+   *Note: Multiple components tie for the 5th spot.*
+
+**5) Top 5 most depended upon (in-degree)**
+
+1. **primary_database_cluster** — **10**
+2. **cache_layer** — **6**
+3. **object_storage** — **5**
+4. **user_management_service** — **2**
+5. **course_management_service** — **2**
+   *Also tied at 2:* **content_delivery_service**, **assignment_grading_service**, **assessment_quiz_engine**, **discussion_forum_service**.
+
+**6) Components with zero dependencies (leaf nodes)**
+
+* **primary_database_cluster**
+* **cache_layer**
+* **object_storage**
+* **message_queue_service**
+* **monitoring_logging**
+* **security_compliance**
+
+**7) Components that nothing depends on (root nodes)**
+
+* **web_frontend_application**
+* **video_streaming_service**
+* **analytics_reporting_service**
+* **notification_service**
+* **search_service**
+* **monitoring_logging**
+* **backup_dr_service**
+* **security_compliance**
+
+If you want, I can also output these as JSON metrics or render a quick dependency graph.
