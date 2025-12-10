@@ -22,33 +22,33 @@ This project models real-world system dependencies and proactively identifies hi
 
 Pipeline Overview:
 
-Component & Dependency Extraction
+1. Component & Dependency Extraction
 
-Directed Graph Construction
+2. Directed Graph Construction
 
-Graph Feature Engineering
+3. Graph Feature Engineering
 
-Risk Label Generation
+4. Risk Label Generation
 
-Graph Neural Network Training
+5. Graph Neural Network Training
 
-High-Risk Node Ranking
+6. High-Risk Node Ranking
 
 Reliability Insights & Recommendations
 
 🛠️ Tech Stack
 
-Languages: Python
+1. Languages: Python
 
-Graph Processing: NetworkX
+2. Graph Processing: NetworkX
 
-Deep Learning: PyTorch, PyTorch Geometric
+3. Deep Learning: PyTorch, PyTorch Geometric
 
-Data Handling: NumPy, Pandas
+4. Data Handling: NumPy, Pandas
 
-Visualization & Analysis: Matplotlib, Seaborn
+5. Visualization & Analysis: Matplotlib, Seaborn
 
-Modeling: Graph Convolutional Networks (GCN)
+6. Modeling: Graph Convolutional Networks (GCN)
 
 📊 Results
 
